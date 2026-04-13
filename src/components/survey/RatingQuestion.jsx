@@ -5,6 +5,7 @@ export default function RatingQuestion({ question, value, onChange }) {
       {Array.from({ length: max }, (_, i) => i + 1).map((n) => (
         <button
           key={n}
+          type="button"
           onClick={() => onChange(n)}
           className={`w-10 h-10 rounded-full border-2 font-medium text-sm transition-colors cursor-pointer ${
             value >= n

@@ -6,6 +6,7 @@ export default function NPSQuestion({ question, value, onChange }) {
         {Array.from({ length: 11 }, (_, i) => i).map((n) => (
           <button
             key={n}
+            type="button"
             onClick={() => onChange(n)}
             className={`w-9 h-9 rounded border font-medium text-sm transition-colors cursor-pointer ${
               value === n

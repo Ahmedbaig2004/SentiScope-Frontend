@@ -19,6 +19,7 @@ export default function SurveyEditor() {
   const [survey, setSurvey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState(null); // 'saved' | 'error' | null
   const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
@@ -30,16 +31,19 @@ export default function SurveyEditor() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveStatus(null);
     try {
-      const res = await api.put(`/surveys/${id}`, {
+      await api.put(`/surveys/${id}`, {
         title: survey.title,
         description: survey.description,
         questions: survey.questions,
         settings: survey.settings,
       });
-      setSurvey(res.data.survey);
+      setSaveStatus('saved');
+      setTimeout(() => setSaveStatus(null), 2000);
     } catch (err) {
-      alert(err.response?.data?.error || 'Failed to save');
+      setSaveStatus('error');
+      console.error('Save failed:', err.response?.data || err.message);
     } finally {
       setSaving(false);
     }
@@ -57,7 +61,8 @@ export default function SurveyEditor() {
   };
 
   const deleteQuestion = (index) => {
-    const questions = survey.questions.filter((_, i) => i !== index)
+    const questions = survey.questions
+      .filter((_, i) => i !== index)
       .map((q, i) => ({ ...q, order: i }));
     setSurvey({ ...survey, questions });
   };
@@ -71,12 +76,16 @@ export default function SurveyEditor() {
     setSurvey({ ...survey, questions });
   };
 
-  if (loading || !survey) {
+  if (loading) {
     return (
       <div className="flex justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
       </div>
     );
+  }
+
+  if (!survey) {
+    return null;
   }
 
   return (
@@ -90,6 +99,12 @@ export default function SurveyEditor() {
           &larr; Back to surveys
         </button>
         <div className="flex items-center gap-2">
+          {saveStatus === 'saved' && (
+            <span className="text-sm text-green-600 font-medium">Saved!</span>
+          )}
+          {saveStatus === 'error' && (
+            <span className="text-sm text-red-500 font-medium">Save failed</span>
+          )}
           <button
             onClick={() => setShowSettings(!showSettings)}
             className="text-sm px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 cursor-pointer"
@@ -117,7 +132,7 @@ export default function SurveyEditor() {
         />
         <input
           type="text"
-          value={survey.description}
+          value={survey.description || ''}
           onChange={(e) => setSurvey({ ...survey, description: e.target.value })}
           className="w-full text-sm text-gray-500 border-none focus:outline-none bg-transparent mt-1"
           placeholder="Add a description..."

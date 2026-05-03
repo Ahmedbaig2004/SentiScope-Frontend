@@ -4,7 +4,7 @@ import api from '../api/axios';
 import MCQChart from '../components/analytics/MCQChart';
 import RatingChart from '../components/analytics/RatingChart';
 import NPSChart from '../components/analytics/NPSChart';
-import TextResponses from '../components/analytics/TextResponses';
+import SentimentChart from '../components/analytics/SentimentChart';
 
 // Frontend mirror of the Strategy pattern:
 // Maps question type -> correct chart component
@@ -12,7 +12,7 @@ const chartComponents = {
   mcq: MCQChart,
   rating: RatingChart,
   nps: NPSChart,
-  text: TextResponses,
+  text: SentimentChart,
 };
 
 const typeLabels = {

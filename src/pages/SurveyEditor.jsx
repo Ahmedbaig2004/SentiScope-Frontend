@@ -79,7 +79,7 @@ export default function SurveyEditor() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
       </div>
     );
   }
@@ -89,53 +89,58 @@ export default function SurveyEditor() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-4xl mx-auto pb-20 px-0 sm:px-4">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-8 bg-white/20 p-6 rounded-[32px] border border-white/20 backdrop-blur-md lg:bg-transparent lg:p-0 lg:border-none lg:backdrop-blur-none">
         <button
           onClick={() => navigate('/surveys')}
-          className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer"
+          className="group flex items-center gap-2 text-sm font-black text-violet-800 hover:text-violet-950 transition-all cursor-pointer uppercase tracking-widest opacity-70"
         >
-          &larr; Back to surveys
+          <span className="group-hover:-translate-x-1 transition-transform">&larr;</span> Back <span className="hidden xs:inline">to surveys</span>
         </button>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
           {saveStatus === 'saved' && (
-            <span className="text-sm text-green-600 font-medium">Saved!</span>
+            <span className="text-xs text-green-600 font-black uppercase tracking-widest animate-pulse mr-auto sm:mr-0">Saved!</span>
           )}
           {saveStatus === 'error' && (
-            <span className="text-sm text-red-500 font-medium">Save failed</span>
+            <span className="text-xs text-red-500 font-black uppercase tracking-widest mr-auto sm:mr-0">Save failed</span>
           )}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className="text-sm px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 cursor-pointer"
+            className="flex-1 sm:flex-none text-[10px] sm:text-xs px-4 sm:px-5 py-3 sm:py-2.5 bg-white/40 text-violet-900 rounded-xl hover:bg-white/60 transition-all font-black uppercase tracking-widest border border-white/20 shadow-sm cursor-pointer"
           >
             Settings
           </button>
           <button
             onClick={handleSave}
             disabled={saving}
-            className="text-sm px-4 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 cursor-pointer font-medium"
+            className="flex-[2] sm:flex-none text-[10px] sm:text-xs px-5 sm:px-6 py-3 sm:py-2.5 bg-violet-600 text-white rounded-xl hover:bg-violet-700 disabled:opacity-50 transition-all font-black uppercase tracking-widest shadow-lg shadow-violet-900/30 border-none cursor-pointer"
           >
-            {saving ? 'Saving...' : 'Save'}
+            {saving ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
       </div>
 
-      {/* Title & Description */}
-      <div className="mb-6">
+      {/* Title & Description Container */}
+      <div className="bg-gradient-to-br from-violet-100/90 via-violet-200/80 to-violet-300/70 backdrop-blur-xl p-6 sm:p-8 rounded-[32px] sm:rounded-3xl border border-violet-400/20 shadow-xl mb-8 group overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
         <input
           type="text"
           value={survey.title}
           onChange={(e) => setSurvey({ ...survey, title: e.target.value })}
-          className="w-full text-2xl font-bold text-gray-900 border-none focus:outline-none bg-transparent"
+          className="w-full text-2xl sm:text-4xl font-black text-violet-950 border-none focus:outline-none bg-transparent tracking-tighter placeholder:text-violet-300"
           placeholder="Survey title..."
         />
-        <input
-          type="text"
+        <textarea
+          rows={1}
           value={survey.description || ''}
           onChange={(e) => setSurvey({ ...survey, description: e.target.value })}
-          className="w-full text-sm text-gray-500 border-none focus:outline-none bg-transparent mt-1"
-          placeholder="Add a description..."
+          className="w-full text-md sm:text-lg font-bold text-violet-800 border-none focus:outline-none bg-transparent mt-3 placeholder:text-violet-300 resize-none opacity-80"
+          placeholder="Add a compelling description for your respondents..."
+          onInput={(e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+          }}
         />
       </div>
 
@@ -167,8 +172,10 @@ export default function SurveyEditor() {
       </div>
 
       {/* Add question */}
-      <div className="border-2 border-dashed border-gray-200 rounded-xl p-6">
-        <p className="text-sm text-gray-500 mb-3 text-center">Add a question</p>
+      <div className="bg-white/30 backdrop-blur-md border-2 border-dashed border-violet-400/30 rounded-3xl p-10 transition-all hover:bg-white/40 group/add">
+        <p className="text-xs font-black text-violet-800 mb-6 text-center uppercase tracking-[0.3em] opacity-60 group-hover/add:opacity-100 transition-opacity">
+          Add a new question
+        </p>
         <QuestionTypeSelector onSelect={addQuestion} />
       </div>
     </div>

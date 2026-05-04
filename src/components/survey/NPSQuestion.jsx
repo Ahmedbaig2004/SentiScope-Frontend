@@ -10,8 +10,8 @@ export default function NPSQuestion({ question, value, onChange }) {
             onClick={() => onChange(n)}
             className={`w-9 h-9 rounded border font-medium text-sm transition-colors cursor-pointer ${
               value === n
-                ? 'bg-indigo-600 border-indigo-600 text-white'
-                : 'border-gray-300 text-gray-500 hover:border-indigo-400'
+                ? 'bg-violet-600 border-violet-600 text-white'
+                : 'border-gray-300 text-gray-500 hover:border-violet-400'
             }`}
           >
             {n}

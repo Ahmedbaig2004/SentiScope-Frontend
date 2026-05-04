@@ -4,7 +4,7 @@ export default function TemplatePreview({ template, onClose, onUse }) {
   if (!template) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4 backdrop-blur-sm">
       <div className="bg-white rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-gray-200">
@@ -29,7 +29,7 @@ export default function TemplatePreview({ template, onClose, onUse }) {
         <div className="p-5 border-t border-gray-200">
           <button
             onClick={() => onUse(template._id)}
-            className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 font-medium cursor-pointer"
+            className="w-full bg-violet-600 text-white py-2 rounded-lg hover:bg-violet-700 font-medium cursor-pointer"
           >
             Use this template
           </button>

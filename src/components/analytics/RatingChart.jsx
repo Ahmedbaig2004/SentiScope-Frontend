@@ -5,7 +5,7 @@ export default function RatingChart({ data, total, average, max }) {
     <div>
       <div className="flex items-center gap-6 mb-3">
         <div>
-          <p className="text-3xl font-bold text-indigo-600">{average}</p>
+          <p className="text-3xl font-bold text-violet-600">{average}</p>
           <p className="text-xs text-gray-400">avg out of {max}</p>
         </div>
         <p className="text-sm text-gray-500">{total} response{total !== 1 ? 's' : ''}</p>

@@ -21,47 +21,50 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">
+      <h1 className="text-2xl font-bold text-violet-950 mb-6">
         Welcome back, {user?.name}
       </h1>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-xl border border-gray-200">
-          <p className="text-sm text-gray-500">Total Surveys</p>
-          <p className="text-3xl font-bold text-gray-900 mt-1">
+        <div className="bg-gradient-to-br from-violet-100/95 via-violet-200/90 to-violet-300/80 backdrop-blur-xl p-6 rounded-3xl border border-violet-400/20 shadow-xl hover:shadow-2xl transition-all group overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -mr-12 -mt-12 group-hover:bg-white/20 transition-all" />
+          <p className="text-[10px] text-violet-900 font-black uppercase tracking-[0.2em] opacity-70">Total Surveys</p>
+          <p className="text-4xl font-black text-violet-950 mt-2 tracking-tight">
             {loading ? '—' : surveys.length}
           </p>
         </div>
-        <div className="bg-white p-6 rounded-xl border border-gray-200">
-          <p className="text-sm text-gray-500">Total Responses</p>
-          <p className="text-3xl font-bold text-indigo-600 mt-1">
+        <div className="bg-gradient-to-br from-violet-100/95 via-violet-200/90 to-violet-300/80 backdrop-blur-xl p-6 rounded-3xl border border-violet-400/20 shadow-xl hover:shadow-2xl transition-all group overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -mr-12 -mt-12 group-hover:bg-white/20 transition-all" />
+          <p className="text-[10px] text-violet-900 font-black uppercase tracking-[0.2em] opacity-70">Total Responses</p>
+          <p className="text-4xl font-black text-violet-800 mt-2 tracking-tight">
             {loading ? '—' : totalResponses}
           </p>
         </div>
-        <div className="bg-white p-6 rounded-xl border border-gray-200">
-          <p className="text-sm text-gray-500">Active Surveys</p>
-          <p className="text-3xl font-bold text-green-600 mt-1">
+        <div className="bg-gradient-to-br from-violet-100/95 via-violet-200/90 to-violet-300/80 backdrop-blur-xl p-6 rounded-3xl border border-violet-400/20 shadow-xl hover:shadow-2xl transition-all group overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -mr-12 -mt-12 group-hover:bg-white/20 transition-all" />
+          <p className="text-[10px] text-violet-900 font-black uppercase tracking-[0.2em] opacity-70">Active Surveys</p>
+          <p className="text-4xl font-black text-indigo-800 mt-2 tracking-tight">
             {loading ? '—' : activeSurveys}
           </p>
         </div>
       </div>
 
       {/* Recent surveys */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <div className="bg-gradient-to-br from-violet-100/95 via-violet-200/90 to-violet-300/80 backdrop-blur-xl rounded-3xl border border-violet-400/20 p-6 shadow-xl">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-gray-900">Recent Surveys</h2>
-          <Link to="/surveys" className="text-sm text-indigo-600 hover:underline">View all</Link>
+          <h2 className="font-semibold text-violet-950">Recent Surveys</h2>
+          <Link to="/surveys" className="text-sm text-violet-700 hover:text-violet-900 hover:underline">View all</Link>
         </div>
 
         {loading ? (
           <div className="flex justify-center py-6">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-violet-600"></div>
           </div>
         ) : recentSurveys.length === 0 ? (
           <div className="text-center py-6">
-            <p className="text-gray-500 mb-3">No surveys yet.</p>
-            <Link to="/templates" className="text-sm text-indigo-600 hover:underline">
+            <p className="text-violet-800 mb-3">No surveys yet.</p>
+            <Link to="/templates" className="text-sm text-violet-600 hover:underline">
               Start from a template
             </Link>
           </div>
@@ -70,7 +73,7 @@ export default function Dashboard() {
             {recentSurveys.map((s) => (
               <div key={s._id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                 <div>
-                  <Link to={`/surveys/${s._id}/edit`} className="text-sm font-medium text-gray-900 hover:text-indigo-600">
+                  <Link to={`/surveys/${s._id}/edit`} className="text-sm font-medium text-gray-900 hover:text-violet-600">
                     {s.title}
                   </Link>
                   <p className="text-xs text-gray-400">{s.responseCount} responses</p>
@@ -83,7 +86,7 @@ export default function Dashboard() {
                   }`}>
                     {s.status}
                   </span>
-                  <Link to={`/surveys/${s._id}/analytics`} className="text-xs text-indigo-600 hover:underline">
+                  <Link to={`/surveys/${s._id}/analytics`} className="text-xs text-violet-600 hover:underline">
                     Analytics
                   </Link>
                 </div>

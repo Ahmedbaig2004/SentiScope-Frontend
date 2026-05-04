@@ -9,7 +9,7 @@ export default function MCQQuestion({ question, value, onChange }) {
             value={opt}
             checked={value === opt}
             onChange={() => onChange(opt)}
-            className="text-indigo-600"
+            className="text-violet-600"
           />
           <span className="text-sm text-gray-700">{opt}</span>
         </label>

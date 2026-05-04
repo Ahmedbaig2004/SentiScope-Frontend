@@ -55,7 +55,7 @@ export default function PublicSurvey() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function PublicSurvey() {
         {survey?.settings?.showProgressBar && (
           <div className="w-full bg-gray-200 rounded-full h-1.5 mb-8">
             <div
-              className="bg-indigo-600 h-1.5 rounded-full transition-all"
+              className="bg-violet-600 h-1.5 rounded-full transition-all"
               style={{
                 width: `${Object.keys(answers).length / (survey?.questions?.length || 1) * 100}%`,
               }}
@@ -131,7 +131,7 @@ export default function PublicSurvey() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-indigo-600 text-white py-3 rounded-xl hover:bg-indigo-700 disabled:opacity-50 font-medium cursor-pointer"
+            className="w-full bg-violet-600 text-white py-3 rounded-xl hover:bg-violet-700 disabled:opacity-50 font-medium cursor-pointer"
           >
             {submitting ? 'Submitting...' : 'Submit Response'}
           </button>
